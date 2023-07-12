@@ -1,0 +1,11 @@
+.header{
+    color: whitesmoke;
+    background-color: orangered;
+    text-align: center;
+}
+
+.header h1{
+    font-family: "Outfit" ;
+    font-size: 24px;
+    font-weight: 900;
+}
