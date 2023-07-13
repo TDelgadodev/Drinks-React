@@ -1,19 +1,21 @@
-import { Row } from "react-bootstrap"
-import useDrinks from "../../hooks/useDrinks"
-import { DrinkCard } from "../DrinkCard"
+import { Row } from 'react-bootstrap'
+import { DrinkCard } from '../DrinkCard'
+import useDrinks from '../../hooks/useDrinks'
+
+
 
 export const DrinksList = () => {
-    const { drinks } = useDrinks()
+
+
+  const {drinks} = useDrinks()
+
   return (
-    <Row>
-        {
-            drinks.map(drink => (
-                <DrinkCard key={drink.idDrink} drink={drink}/>
-            ))
-        }
-    </Row>
+   <Row className='mb-5'>
+    {
+        drinks.map(drink => (
+            <DrinkCard key={drink.idDrink} drink={drink}/>
+        ))
+    }
+   </Row>
   )
 }
-
-
-
