@@ -1,14 +1,14 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { AuthProvider } from "./context/AuthProvider";
 import { CartProvider } from "./context/CartProvider";
 import { CategoriesProvider } from "./context/CategoriesProvider";
 import { DrinksProvider } from "./context/DrinksProviver";
-import { UserProvider } from "./context/UserProvider";
 import { MainLayout } from "./layouts";
 import { AppRoutes } from "./routes";
 
 function App() {
   return (
-    <UserProvider>
+    <AuthProvider>
       <CategoriesProvider>
         <DrinksProvider>
           <CartProvider>
@@ -18,7 +18,7 @@ function App() {
           </CartProvider>
         </DrinksProvider>
       </CategoriesProvider>
-    </UserProvider>
+    </AuthProvider>
   );
 }
 

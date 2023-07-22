@@ -91,7 +91,7 @@ export const SearchForm = () => {
           </Row>
           <Row className="justify-content-end mt-3">
             <Col md={3}>
-            <Button variant="primary" 
+            <Button 
               disabled={loading} 
               className="w-100 mb-3" 
               type="submit">
