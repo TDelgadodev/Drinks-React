@@ -1,41 +1,43 @@
 import { Formik, Field, ErrorMessage } from "formik";
-import { Form, Row, Col, Alert, Button } from "react-bootstrap";
 import * as Yup from 'yup';
-import useAuth from "../../hooks/useAuth";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import { registerAuthService } from "../../services/auth.service";
+import Swal from "sweetalert2";
 
 
 
+export const Register = () => {
 
-export const Login = () => {
-
-const navigate = useNavigate()
-
-const {login, alert} = useAuth()
+  const navigate = useNavigate()
 
   const initialValues = {
+    name: "",
     email: "",
     password:"",
   };
 
 
   const validationSchema = Yup.object({
-    email: Yup.string().required('Debe ingresar un email'),
-    password:Yup.string().required('La contraseña es obligatoria'),
+    name: Yup.string().required('ES colocar un nombre'),
+    email: Yup.string().required('ES colocar un email'),
+    password:Yup.string().required('La contraseña es necesaria'),
   })
 
+  const handleSubmit = async (values) => {
+  const response = await registerAuthService(values)
+ 
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Registro exitoso!',
+    showConfirmButton: false,
+    timer: 1500
+  })
 
-  const handleSubmit = (values) => {
-    login(values)
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: '¡Bienvenido!',
-      showConfirmButton: false,
-      timer: 1600
-    })
-    navigate('/')
+  console.log(response);
+
+  navigate('/login')
   }
 
   return (
@@ -47,8 +49,25 @@ const {login, alert} = useAuth()
 
 
       {(formik) => (
-        <Form onSubmit={formik.handleSubmit} className="col-6 mx-auto m-5">   
-        {alert && <Alert variant="danger">{alert}</Alert>}        
+        <Form onSubmit={formik.handleSubmit} className="col-6 mx-auto">
+         
+              <Form.Group className="mb-3">
+                <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="name">Nombre</Form.Label>
+                <Field
+                  id="name"
+                  type="text"
+                  placeholder="Coloca tu nombre"
+                  name="name"
+                  as={Form.Control}
+                  className="shadow"
+                ></Field>
+                <ErrorMessage
+                name='name'
+                component={Form.Text}
+                className="text-danger ms-2"
+                ></ErrorMessage>
+              </Form.Group>
+           
               <Form.Group className="mb-3">
                 <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="email">Email</Form.Label>
                 <Field
@@ -62,7 +81,7 @@ const {login, alert} = useAuth()
                 <ErrorMessage
                 name='email'
                 component={Form.Text}
-                className="text-danger ms-2 btn btn-sm btn-danger text-white"
+                className="text-danger ms-2"
                 ></ErrorMessage>
               </Form.Group>
 
@@ -78,7 +97,7 @@ const {login, alert} = useAuth()
                 <ErrorMessage
                 name='password'
                 component={Form.Text}
-                className="text-danger ms-2 btn btn-sm btn-danger text-white"
+                className="text-danger ms-2"
                 ></ErrorMessage>
               </Form.Group>
             
@@ -88,7 +107,7 @@ const {login, alert} = useAuth()
               disabled={false} 
               className="w-100 mb-3" 
               type="submit">
-               Ingresá
+                Registrate
               </Button>
             </Col>
           </Row>
