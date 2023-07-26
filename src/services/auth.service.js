@@ -1,34 +1,57 @@
 import axios from 'axios';
 const apiUrlAuth = import.meta.env.VITE_API_URL_AUTH;
 
-export const registerAuthService = async (info) =>{
+export const registerAuthService = async(info) => {
     try {
         const url = `${apiUrlAuth}register`;
-        const {data} = axios.post(url,{
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            body : JSON.stringify(info)
+        const {data} = await axios.post(url,
+            {
+            ...info
+        }, 
+        {
+         headers : {
+            "Content-Type" : "application/json",
+         },
+       body: JSON.stringify(info) 
         })
-        
+
         return data
-    }   catch (error) {
-        throw new Error(error.message)
+
+    } catch (error) {
+        throw error.response.data
     }
 }
 
 export const loginAuthService = async (info) => {
     try {
-        const url = `${apiUrlAuth}register`;
-        const {data} = axios.post(url,{
-            headers : {
-                "Content-Type" : "application/json"
+        const url = `${apiUrlAuth}login`;
+        const {data} = await axios.post(url,
+            {
+                ...info
             },
-            body : JSON.stringify(info)
-        })
-        
+            {
+                headers : {
+                    "Content-Type" : "application/json",
+                 },
+            })    
         return data
     }   catch (error) {
-        throw new Error(error.message)
+        //console.log(error.response.data);
+        throw error.response.data
+    }
+}
+
+export const profileUserService = async (token) => {
+    try {
+        const url = `${apiUrlAuth}profile`;
+        const {data} = await axios.get(url,{
+            headers : {
+                Authorization : token
+            },
+        })
+
+        return data
+    } catch (error) {
+        throw error.response.data
     }
 }

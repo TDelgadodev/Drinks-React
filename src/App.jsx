@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "./context/AuthProvider";
 import { CartProvider } from "./context/CartProvider";
@@ -8,6 +9,7 @@ import { AppRoutes } from "./routes";
 
 function App() {
   return (
+    <BrowserRouter>
     <AuthProvider>
       <CategoriesProvider>
         <DrinksProvider>
@@ -19,6 +21,7 @@ function App() {
         </DrinksProvider>
       </CategoriesProvider>
     </AuthProvider>
+    </BrowserRouter>
   );
 }
 

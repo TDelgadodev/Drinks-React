@@ -52,7 +52,7 @@ export const Register = () => {
         <Form onSubmit={formik.handleSubmit} className="col-6 mx-auto">
          
               <Form.Group className="mb-3">
-                <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="name">Nombre</Form.Label>
+                <Form.Label className="text-black" htmlFor="name">Nombre</Form.Label>
                 <Field
                   id="name"
                   type="text"
@@ -69,7 +69,7 @@ export const Register = () => {
               </Form.Group>
            
               <Form.Group className="mb-3">
-                <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="email">Email</Form.Label>
+                <Form.Label className="text-black" htmlFor="email">Email</Form.Label>
                 <Field
                   id="email"
                   type="text"
@@ -86,10 +86,11 @@ export const Register = () => {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="password">Contraseña</Form.Label>
+                <Form.Label className="text-black" htmlFor="password">Contraseña</Form.Label>
                 <Field
                   id="password"
                   type="password"
+                  placeholder="Ingresa su contraseña"
                   name="password"
                   as={Form.Control}
                   className="shadow"

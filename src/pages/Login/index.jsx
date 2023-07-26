@@ -1,18 +1,15 @@
 import { Formik, Field, ErrorMessage } from "formik";
-import { Form, Row, Col, Alert, Button } from "react-bootstrap";
+import { Form, Row, Col, Button, Alert } from "react-bootstrap";
 import * as Yup from 'yup';
-import useAuth from "../../hooks/useAuth";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/UseAuth";
 
 
 
 
 export const Login = () => {
 
-const navigate = useNavigate()
+  const {login,alert} = useAuth()
 
-const {login, alert} = useAuth()
 
   const initialValues = {
     email: "",
@@ -28,14 +25,6 @@ const {login, alert} = useAuth()
 
   const handleSubmit = (values) => {
     login(values)
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: '¡Bienvenido!',
-      showConfirmButton: false,
-      timer: 1600
-    })
-    navigate('/')
   }
 
   return (
@@ -47,10 +36,10 @@ const {login, alert} = useAuth()
 
 
       {(formik) => (
-        <Form onSubmit={formik.handleSubmit} className="col-6 mx-auto m-5">   
-        {alert && <Alert variant="danger">{alert}</Alert>}        
+        <Form onSubmit={formik.handleSubmit} className="col-6 mx-auto m-5">     
+        {alert && <Alert variant="danger">{alert}</Alert>}    
               <Form.Group className="mb-3">
-                <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="email">Email</Form.Label>
+                <Form.Label className="text-black" htmlFor="email">Email</Form.Label>
                 <Field
                   id="email"
                   type="text"
@@ -62,15 +51,16 @@ const {login, alert} = useAuth()
                 <ErrorMessage
                 name='email'
                 component={Form.Text}
-                className="text-danger ms-2 btn btn-sm btn-danger text-white"
+                className="text-danger ms-2"
                 ></ErrorMessage>
               </Form.Group>
 
               <Form.Group>
-                <Form.Label className="bg-primary rounded p-2 text-white shadow" htmlFor="password">Contraseña</Form.Label>
+                <Form.Label className="text-black" htmlFor="password">Contraseña</Form.Label>
                 <Field
                   id="password"
                   type="password"
+                  placeholder="Ingrese su contraseña"
                   name="password"
                   as={Form.Control}
                   className="shadow"
@@ -78,7 +68,7 @@ const {login, alert} = useAuth()
                 <ErrorMessage
                 name='password'
                 component={Form.Text}
-                className="text-danger ms-2 btn btn-sm btn-danger text-white"
+                className="text-danger ms-2"
                 ></ErrorMessage>
               </Form.Group>
             
